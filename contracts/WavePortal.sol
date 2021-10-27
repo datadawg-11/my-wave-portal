@@ -20,15 +20,17 @@ contract WavePortal {
         console.log("I AM A SMART CONTRACT. POG.");
     }
 
-    function wave(string _message) public {
+    function wave(string memory _message) public {
         totalWaves +=1 ;
         console.log("%s has waved!", msg.sender); 
-        waves.push(Wave(msg.sender, message, block.timestamp)); 
+        waves.push(Wave(msg.sender, _message, block.timestamp)); 
 
         emit NewWave(msg.sender, block.timestamp, _message);
     }
 
-
+    function getAllWaves() public view returns (Wave[] memory) {
+            return waves;
+        }
     function getTotalWaves() public view returns (uint256) {
         console.log("We have %d total waves!", totalWaves);
         return totalWaves;
